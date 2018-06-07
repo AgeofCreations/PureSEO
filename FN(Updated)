@@ -1,3 +1,4 @@
+
 Sub FN()
 '
 ' FN
@@ -8,6 +9,8 @@ Dim i As Integer
 Dim replace As Variant
 i = 1
 nofFullNames = 1
+d = 1
+    Range("A1").Select
     ActiveSheet.Paste
     ActiveCell.Offset(0, i).Select
     Do Until IsEmpty(Cells(i, 1))
@@ -29,5 +32,9 @@ nofFullNames = 1
     Range("A1:B100").Select
     Application.CutCopyMode = False
     Selection.ClearContents
-    Range("E5").Select
+    Range("E9").Select
+    For d = 1 To 1000
+    If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For
+    d = d + 1
+    Next d
 End Sub

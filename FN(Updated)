@@ -5,18 +5,21 @@ Sub FN()
 '
 ' Ñî÷åòàíèå êëàâèø: Ctrl+Shift+A
 '
-Dim i As Integer
-Dim replace As Variant
-i = 1
-nofFullNames = 1
-d = 1
+    Dim i As Integer
+    Dim replace As Variant
+    Dim cell As Range
+    Dim r As Range
+    Set r = ActiveSheet.UsedRange
+    i = 1
+    nofFullNames = 1
+    d = 1
     Range("A1").Select
     ActiveSheet.Paste
     ActiveCell.Offset(0, i).Select
     Do Until IsEmpty(Cells(i, 1))
-    ActiveCell.FormulaR1C1 = "#"
-    ActiveCell.Offset(1, 0).Select
-    i = i + 1
+        ActiveCell.FormulaR1C1 = "#"
+        ActiveCell.Offset(1, 0).Select
+        i = i + 1
     Loop
     ActiveCell.Offset(4 - i, 3).Range("A1").Select
     ActiveCell.FormulaR1C1 = _
@@ -25,7 +28,7 @@ d = 1
     ActiveCell.Offset(5, 0).Select
     For nofFullNames = 1 To 1000
     If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For
-    nofFullNames = nofFullNames + 1
+        nofFullNames = nofFullNames + 1
     Next nofFullNames
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
         :=False, Transpose:=False
@@ -34,7 +37,13 @@ d = 1
     Selection.ClearContents
     Range("E9").Select
     For d = 1 To 1000
-    If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For
-    d = d + 1
+        If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For
+        d = d + 1
     Next d
+    Set r = ActiveSheet.UsedRange
+    For Each cell In r.Cells
+        If Right(cell.Value, 1) = "#" Then
+            cell.Value = Left(cell.Value, Len(cell.Value) - 1)
+        End If
+    Next
 End Sub

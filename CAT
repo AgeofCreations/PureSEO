@@ -1,0 +1,104 @@
+Sub CAT()
+'
+' SFP Ìàêðîñ
+'
+'
+    Dim i As Integer
+    Dim i2 As Integer
+    Dim i3 As Integer
+    Dim i4 As Integer
+    Dim i5 As Integer
+    Dim i6 As Integer
+    Dim i7 As Integer
+    Dim r As Range
+    i = 1
+    i2 = 1
+    i3 = 1
+    i4 = 1
+    i5 = 1
+    i6 = 1
+    i7 = 1
+    Columns("B:B").Select
+    Selection.Cut
+    Range("H1").Select
+    ActiveSheet.Paste
+    Selection.Copy
+    Range("BG1").Select
+    ActiveSheet.Paste
+    Application.CutCopyMode = False
+    Selection.TextToColumns Destination:=Range("BG1"), DataType:=xlDelimited, _
+        TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=False, Tab:=False, _
+        Semicolon:=False, Comma:=False, Space:=False, Other:=True, OtherChar _
+        :="#", FieldInfo:=Array(Array(1, 1), Array(2, 1), Array(3, 1), Array(4, 1), Array(5, _
+        1), Array(6, 1), Array(7, 1), Array(8, 1), Array(9, 1), Array(10, 1), Array(11, 1), Array(12 _
+        , 1)), TrailingMinusNumbers:=True
+    Columns("BG:BG").Select
+    Selection.Copy
+    Range("D1").Select
+    ActiveSheet.Paste
+    Columns("BG:CW").Select
+    Application.CutCopyMode = False
+    Selection.ClearContents
+    Rows("1:1").Select
+    Selection.Insert Shift:=xlDown
+    Range("A1").Select
+    ActiveCell.FormulaR1C1 = "ID"
+    Range("B1").Select
+    ActiveCell.FormulaR1C1 = ";"
+    Range("C1").Select
+    ActiveCell.FormulaR1C1 = "Const1"
+    Range("D1").Select
+    ActiveCell.FormulaR1C1 = "Title"
+    Range("H1").Select
+    ActiveCell.FormulaR1C1 = "FN"
+    Range("F1").Select
+    ActiveCell.FormulaR1C1 = "Const2"
+    Range("G1").Select
+    ActiveCell.FormulaR1C1 = ";"
+    Range("J1").Select
+    ActiveCell.FormulaR1C1 = ";;;;;"
+    Range("B1").Select
+     Do Until IsEmpty(Cells(i, 1))
+     ActiveCell.FormulaR1C1 = ";"
+     ActiveCell.Offset(1, 0).Select
+     i = i + 1
+     Loop
+    Range("C2").Select
+     Do Until IsEmpty(Cells(i2, 1))
+     ActiveCell.FormulaR1C1 = "Êóïèòü"
+     ActiveCell.Offset(1, 0).Select
+     i2 = i2 + 1
+     Loop
+     ActiveCell.Offset(-1, 0).Select
+     Selection.ClearContents
+    Range("F2").Select
+    ActiveCell.FormulaR1C1 = _
+        "— êóïèòü îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò ìàãàçèíå Ñèìà-ëåíä"
+    Range("G1").Select
+     Do Until IsEmpty(Cells(i3, 1))
+     ActiveCell.FormulaR1C1 = ";"
+     ActiveCell.Offset(1, 0).Select
+     i3 = i3 + 1
+     Loop
+    Range("E2").Select
+     Do Until IsEmpty(Cells(i4, 1)) '— êóïèòü îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò ìàãàçèíå Ñèìà-ëåíä
+     ActiveCell.FormulaR1C1 = " "
+     ActiveCell.Offset(1, 0).Select
+     i4 = i4 + 1
+     Loop
+     Range("F2").Select
+     Do Until IsEmpty(Cells(i6, 1))
+     ActiveCell.FormulaR1C1 = "îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò ìàãàçèíå Ñèìà-ëåíä"
+     ActiveCell.Offset(1, 0).Select
+     i6 = i6 + 1
+     Loop
+     Range("J1").Select
+     Do Until IsEmpty(Cells(i7, 1))
+     ActiveCell.FormulaR1C1 = ";;;;;"
+     ActiveCell.Offset(1, 0).Select
+     i7 = i7 + 1
+     Loop
+     ActiveCell.Offset(-1, 0).Select
+     Selection.ClearContents
+     Range("A1").Select
+End Sub

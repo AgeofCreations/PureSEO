@@ -2,7 +2,7 @@ Sub SFP()
 '
 ' SFP Макрос
 '
-' Сочетание клавиш: Ctrl+n
+' Hotkey: Ctrl+n
 '
     Dim i As Integer
     Dim i2 As Integer

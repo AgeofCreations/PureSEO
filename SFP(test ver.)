@@ -1,14 +1,15 @@
 Sub SFP()
 '
-' SFP Ìàêðîñ
+' SFP Макрос
 '
-' Ñî÷åòàíèå êëàâèø: Ctrl+n
+' Сочетание клавиш: Ctrl+n
 '
     Dim i As Integer
     Dim i2 As Integer
     Dim i3 As Integer
     Dim i4 As Integer
     Dim i5 As Integer
+    Dim r As Range
     i = 1
     i2 = 1
     i3 = 1
@@ -65,7 +66,7 @@ Sub SFP()
      Loop
     Range("F2").Select
     ActiveCell.FormulaR1C1 = _
-        "— êóïèòü îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò ìàãàçèíå Ñèìà-ëåíä"
+        "— купить оптом и в розницу | Цена от ##minPrice## р в интернет магазине Сима-ленд"
     Range("G1").Select
      Do Until IsEmpty(Cells(i3, 1))
      ActiveCell.FormulaR1C1 = ";;;;;"
@@ -74,11 +75,19 @@ Sub SFP()
      Loop
     Range("F2").Select
      Do Until IsEmpty(Cells(i4, 1))
-     ActiveCell.FormulaR1C1 = "— êóïèòü îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò ìàãàçèíå Ñèìà-ëåíä"
+     ActiveCell.FormulaR1C1 = "— купить оптом и в розницу | Цена от ##minPrice## р в интернет магазине Сима-ленд"
      ActiveCell.Offset(1, 0).Select
      i4 = i4 + 1
      Loop
      ActiveCell.Offset(-1, 0).Select
      Selection.ClearContents
+     Range("E1").Select
+     Set r = ActiveCell
+     For i5 = 1 To 1000
+     If ActiveCell.Value > 2 Then ActiveCell.Value = replace(r, Mid(r, 1, 1), UCase(Mid(r, 1, 1)), 1, 1) Else: Exit For
+     ActiveCell.Offset(1, 0).Select
+     Set r = ActiveCell
+     i5 = i5 + 1
+     Next i5
      Range("A1").Select
 End Sub

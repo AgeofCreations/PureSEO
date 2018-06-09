@@ -1,0 +1,57 @@
+Sub Full()
+
+Dim i As Integer
+Dim e As Integer
+Dim val As Variant
+Dim valu As Variant
+Dim PosStr As Long
+i = 1
+e = 1
+    Sheets.Add After:=Sheets(Sheets.Count)
+    Sheets("Output").Select
+    Range("E2").Select 'Auae?aai E2
+    PosStr = Cells(1, 1).End(xlDown).Row
+    For i = 1 To PosStr
+        val = ActiveCell.Value 
+        ActiveCell.Offset(1, 0).Select 
+        valu = ActiveCell.Value 
+    If val = valu Then 
+    ActiveCell.Offset(-1, -1).Select 
+     Selection.Copy 'Eiie?oai
+     ActiveSheet.Next.Select 
+     Range("A1").Select
+      For d = 1 To 1000
+        If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For
+        d = d + 1
+    Next d
+     ActiveSheet.Paste
+     ActiveSheet.Previous.Select
+     ActiveCell.Offset(1, 1).Select
+    ElseIf ActiveCell.Value < 2 Or val < 2 Then Exit For
+    Else:
+    ActiveSheet.Next.Select
+    Application.Run "'PLS WORK.xlsx'!FNForFull"
+    ActiveSheet.Previous.Select
+    val = ActiveCell.Value
+    End If
+    Next i ' Iiaoi?yai
+    ActiveSheet.Next.Select
+    Application.Run "'PERSONAL.xlsb'!FNForFull"
+    Sheets("Output").Select
+    Application.Run "'PERSONAL.xlsb'!equality"
+    Rows("1:1").Select
+    Selection.Delete Shift:=xlUp
+    Columns("E:E").Select
+    Selection.Copy
+    ActiveSheet.Next.Select
+    Columns("G:G").Select
+    ActiveSheet.Paste
+    Columns("G:H").Select
+    Application.CutCopyMode = False
+    Selection.Copy
+    Sheets.Add After:=Sheets(Sheets.Count)
+    ActiveSheet.Paste
+    Application.Run "'PERSONAL.xlsb'!SFP"
+    ActiveSheet.Previous.Select
+    ActiveWindow.SelectedSheets.Delete
+End Sub

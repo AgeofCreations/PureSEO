@@ -1,7 +1,4 @@
 Sub Full()
-'
-' Iae?in1 Iae?in
-'
 
 Dim i As Integer
 Dim e As Integer
@@ -15,13 +12,13 @@ e = 1
     Range("E2").Select 'Auae?aai E2
     PosStr = Cells(1, 1).End(xlDown).Row
     For i = 1 To PosStr
-        val = ActiveCell.Value 'I?enaaeaaai val cia?aiea y?aeee
-        ActiveCell.Offset(1, 0).Select 'Auae?aai neaao?uo? y?aeeo
-        valu = ActiveCell.Value 'I?enaaeaaai valu cia?aiea y?aeee
-    If val = valu Then 'N?aaieaaai y?aeee
-    ActiveCell.Offset(-1, -1).Select 'Anee ?aaiu, aica?auaainy ia ianeiie?iaaiio? y?aeeo n cai?inii
+        val = ActiveCell.Value 
+        ActiveCell.Offset(1, 0).Select 
+        valu = ActiveCell.Value 
+    If val = valu Then 
+    ActiveCell.Offset(-1, -1).Select 
      Selection.Copy 'Eiie?oai
-     ActiveSheet.Next.Select 'Ia?aoiaei ia neaao?uee eeno
+     ActiveSheet.Next.Select 
      Range("A1").Select
       For d = 1 To 1000
         If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For
@@ -55,13 +52,11 @@ e = 1
     Sheets.Add After:=Sheets(Sheets.Count)
     ActiveSheet.Paste
     Application.Run "'PLS WORK.xlsx'!CATForFull"
+    ActiveSheet.Previous.Select
+    ActiveWindow.SelectedSheets.Delete
 End Sub
 Sub FNForFull()
-'
-' FN
-'
-' Ni?aoaiea eeaaeo: Ctrl+Shift+A
-'
+
     Dim i As Integer
     Dim replace As Variant
     Dim cell As Range
@@ -117,11 +112,11 @@ Dim PosStr As Long
 PosStr = Cells(1, 1).End(xlDown).Row
 i = 1
 e = 1
-    Range("E2").Select 'Auae?aai E2
+    Range("E2").Select 
     For i = 1 To PosStr
-        val = ActiveCell.Value 'I?enaaeaaai val cia?aiea y?aeee
-        ActiveCell.Offset(1, 0).Select 'Auae?aai neaao?uo? y?aeeo
-        valu = ActiveCell.Value 'I?enaaeaaai valu cia?aiea y?aeee
+        val = ActiveCell.Value 
+        ActiveCell.Offset(1, 0).Select 
+        valu = ActiveCell.Value 
     If val = valu Then
     Selection.EntireRow.Delete
     ActiveCell.Offset(-1, 0).Select
@@ -131,10 +126,7 @@ e = 1
     Next i ' Iiaoi?yai
 End Sub
 Sub CATForFull()
-'
-' SFP Ìàêðîñ
-'
-'
+
     Dim i As Integer
     Dim i2 As Integer
     Dim i3 As Integer
@@ -237,14 +229,130 @@ End Sub
 
 
 
-Sub Ìàêðîñ2()
-'
-' Ìàêðîñ2 Ìàêðîñ
-'
+Sub Sort()
 
+    Columns("D:F").Select
+    Selection.AutoFilter
+    ActiveWorkbook.Worksheets("Output").AutoFilter.Sort.SortFields.Clear
+    ActiveWorkbook.Worksheets("Output").AutoFilter.Sort.SortFields.Add Key:=Range _
+        ("F1:F137"), SortOn:=xlSortOnValues, Order:=xlDescending, DataOption:= _
+        xlSortTextAsNumbers
+    With ActiveWorkbook.Worksheets("Output").AutoFilter.Sort
+        .Header = xlYes
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+    ActiveWorkbook.Worksheets("Output").AutoFilter.Sort.SortFields.Clear
+    ActiveWorkbook.Worksheets("Output").AutoFilter.Sort.SortFields.Add Key:=Range _
+        ("E2:E137"), SortOn:=xlSortOnValues, Order:=xlAscending, DataOption:= _
+        xlSortTextAsNumbers
+    ActiveWorkbook.Worksheets("Output").AutoFilter.Sort.SortFields.Add(Range( _
+        "E2:E137"), xlSortOnCellColor, xlAscending, , xlSortNormal).SortOnValue.Color _
+        = RGB(253, 173, 246)
+    ActiveWorkbook.Worksheets("Output").AutoFilter.Sort.SortFields.Add(Range( _
+        "E2:E137"), xlSortOnCellColor, xlAscending, , xlSortNormal).SortOnValue.Color _
+        = RGB(182, 255, 161)
+    With ActiveWorkbook.Worksheets("Output").AutoFilter.Sort
+        .Header = xlYes
+        .MatchCase = False
+        .Orientation = xlTopToBottom
+        .SortMethod = xlPinYin
+        .Apply
+    End With
+End Sub
+
+Sub SFP()
 '
-    ActiveSheet.Previous.Select
-    ActiveSheet.Previous.Select
-    ActiveWindow.SelectedSheets.Delete
-    ActiveWindow.SelectedSheets.Delete
+' SFP Макрос
+'
+' Hotkey: Ctrl+n
+'
+    Dim i As Integer
+    Dim i2 As Integer
+    Dim i3 As Integer
+    Dim i4 As Integer
+    Dim i5 As Integer
+    Dim r As Range
+    i = 1
+    i2 = 1
+    i3 = 1
+    i4 = 1
+    i5 = 1
+    Columns("B:B").Select
+    Selection.Cut
+    Range("C1").Select
+    ActiveSheet.Paste
+    Selection.Copy
+    Range("BG1").Select
+    ActiveSheet.Paste
+    Application.CutCopyMode = False
+    Selection.TextToColumns Destination:=Range("BG1"), DataType:=xlDelimited, _
+        TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=False, Tab:=False, _
+        Semicolon:=False, Comma:=False, Space:=False, Other:=True, OtherChar _
+        :="#", FieldInfo:=Array(Array(1, 1), Array(2, 1), Array(3, 1), Array(4, 1), Array(5, _
+        1), Array(6, 1), Array(7, 1), Array(8, 1), Array(9, 1), Array(10, 1), Array(11, 1), Array(12 _
+        , 1)), TrailingMinusNumbers:=True
+    Columns("BG:BG").Select
+    Selection.Copy
+    Range("E1").Select
+    ActiveSheet.Paste
+    Columns("BG:CW").Select
+    Application.CutCopyMode = False
+    Selection.ClearContents
+    Rows("1:1").Select
+    Selection.Insert Shift:=xlDown
+    Range("A1").Select
+    ActiveCell.FormulaR1C1 = "ID"
+    Range("B1").Select
+    ActiveCell.FormulaR1C1 = ";"
+    Range("C1").Select
+    ActiveCell.FormulaR1C1 = "FN"
+    Range("D1").Select
+    ActiveCell.FormulaR1C1 = ";"
+    Range("E1").Select
+    ActiveCell.FormulaR1C1 = "Title"
+    Range("F1").Select
+    ActiveCell.FormulaR1C1 = "Const"
+    Range("G1").Select
+    ActiveCell.FormulaR1C1 = ";;;;;"
+    Range("B1").Select
+     Do Until IsEmpty(Cells(i, 1))
+     ActiveCell.FormulaR1C1 = ";"
+     ActiveCell.Offset(1, 0).Select
+     i = i + 1
+     Loop
+    Range("D1").Select
+     Do Until IsEmpty(Cells(i2, 1))
+     ActiveCell.FormulaR1C1 = ";"
+     ActiveCell.Offset(1, 0).Select
+     i2 = i2 + 1
+     Loop
+    Range("F2").Select
+    ActiveCell.FormulaR1C1 = _
+        "— купить оптом и в розницу | Цена от ##minPrice## р в интернет магазине Сима-ленд"
+    Range("G1").Select
+     Do Until IsEmpty(Cells(i3, 1))
+     ActiveCell.FormulaR1C1 = ";;;;;"
+     ActiveCell.Offset(1, 0).Select
+     i3 = i3 + 1
+     Loop
+    Range("F2").Select
+     Do Until IsEmpty(Cells(i4, 1))
+     ActiveCell.FormulaR1C1 = "— купить оптом и в розницу | Цена от ##minPrice## р в интернет магазине Сима-ленд"
+     ActiveCell.Offset(1, 0).Select
+     i4 = i4 + 1
+     Loop
+     ActiveCell.Offset(-1, 0).Select
+     Selection.ClearContents
+     Range("E1").Select
+     Set r = ActiveCell
+     For i5 = 1 To 1000
+     If ActiveCell.Value > 2 Then ActiveCell.Value = replace(r, Mid(r, 1, 1), UCase(Mid(r, 1, 1)), 1, 1) Else: Exit For
+     ActiveCell.Offset(1, 0).Select
+     Set r = ActiveCell
+     i5 = i5 + 1
+     Next i5
+     Range("A1").Select
 End Sub

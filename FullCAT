@@ -1,4 +1,4 @@
-Sub Full()
+Sub FullCAT()
 
 Dim i As Integer
 Dim e As Integer

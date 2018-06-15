@@ -43,8 +43,8 @@ e = 1
 	'	Next d 'Повторяем цикл
 		
     ' ActiveSheet.Paste 'Вставляем
-	 'ActiveSheet.Previous.Select 'Выбираем предыдущий лист
-     ActiveCell.Offset(0, 1).Select 'Смещаемся с текущей ячейки на ячейку с ID ниже по строке для проверки на запролненность
+    ActiveSheet.Previous.Select 'Выбираем предыдущий лист
+    ActiveCell.Offset(0, 1).Select 'Смещаемся с текущей ячейки на ячейку с ID ниже по строке для проверки на запролненность
     ElseIf ActiveCell.Value < 2 and val < 2 Then Exit For ' Если ячейка пуста, выходим из цикла
     Else: ' В противном случае
 		ActiveSheet.Next.Select ' Выбираем следующий лист

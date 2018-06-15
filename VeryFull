@@ -263,6 +263,9 @@ End Sub
 
 
 Sub FullSFP()
+'
+' Для быстрых категорий
+'
 
 Dim i As Integer
 Dim e As Integer
@@ -273,49 +276,76 @@ i = 1
 e = 1
     Sheets.Add After:=Sheets(Sheets.Count)
     Sheets("Output").Select
-    Range("E2").Select 'Auae?aai E2
+    Range("E2").Select 'Выбираем ячейку Е2
     PosStr = Cells(1, 1).End(xlDown).Row
     For i = 1 To PosStr
-        val = ActiveCell.Value
-        ActiveCell.Offset(1, 0).Select
-        valu = ActiveCell.Value
-    If val = valu Then
-    ActiveCell.Offset(-1, -1).Select
-     Selection.Copy 'Eiie?oai
-     ActiveSheet.Next.Select
-     Range("A1").Select
-      For d = 1 To 1000
-        If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For
-        d = d + 1
-    Next d
-     ActiveSheet.Paste
-     ActiveSheet.Previous.Select
-     ActiveCell.Offset(1, 1).Select
-    ElseIf ActiveCell.Value < 2 Or val < 2 Then Exit For
-    Else:
-    ActiveSheet.Next.Select
-    Application.Run "'PERSONAL.xlsb'!FNForFull"
-    ActiveSheet.Previous.Select
-    val = ActiveCell.Value
-    End If
-    Next i ' Iiaoi?yai
-    ActiveSheet.Next.Select
-    Application.Run "'PERSONAL.xlsb'!FNForFull"
-    Sheets("Output").Select
-    Application.Run "'PERSONAL.xlsb'!equality"
-    Rows("1:1").Select
-    Selection.Delete Shift:=xlUp
-    Columns("E:E").Select
-    Selection.Copy
-    ActiveSheet.Next.Select
-    Columns("G:G").Select
-    ActiveSheet.Paste
-    Columns("G:H").Select
-    Application.CutCopyMode = False
-    Selection.Copy
-    Sheets.Add After:=Sheets(Sheets.Count)
-    ActiveSheet.Paste
-    Application.Run "'PERSONAL.xlsb'!SFP"
+		ActiveCell.Offset(0, -1).Select 'Cмещаемся на ячейку с запросом, содержащуюся слева от первой ячейки ID для текущего цикла.
+		Selection.Copy 'Копируем
+		ActiveSheet.Next.Select 'Выбираем следующий лист.
+		Range("A1").Select 'Выбираем там ячейку А1
+			For d = 1 To 1000 'Объявляем цикл для скрипта FN
+				If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For 'Проверяем ячейку на заполненность. Если заполнена, смещаемся на следующую. Если нет, выходим из цикла.
+				d = d + 1 'Это для повтора цикла
+			Next d 'Повторяем цикл
+			ActiveSheet.Paste 'Вставляем
+			ActiveSheet.Previous.Select 'Выбираем предыдущий лист
+			ActiveCell.Offset(0, 1).Select
+        val = ActiveCell.Value 'Присваиваем переменной значение ячейки
+        ActiveCell.Offset(1, 0).Select 'Смещаемся на 1 вниз
+        valu = ActiveCell.Value 'Присваиваем значение следующей ячейки следующей переменной.
+		ActiveCell.Offset(1, 0).Select 'Смещаемся с текущей ячейки на ячейку с ID ниже по строке для проверки на заполненность
+    If val = valu Then 'Сравниваем их
+		ActiveCell.Offset(-1, -1).Select 'Если равны, смещаемся на ячейку с запросом, содержащуюся слева от первой ячейки ID для текущего цикла.
+		Selection.Copy 'Копируем
+		ActiveSheet.Next.Select 'Выбираем следующий лист.
+		'Range("A1").Select 'Выбираем там ячейку А1
+		'd=1
+		
+		'For d = 1 To 1000 'Объявляем цикл для скрипта FN
+		'	If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For 'Проверяем ячейку на заполненность. Если заполнена, смещаемся на следующую. Если нет, выходим из цикла.
+	'			d = d + 1 'Это для повтора цикла
+	'	Next d 'Повторяем цикл
+		
+    ' ActiveSheet.Paste 'Вставляем
+	 'ActiveSheet.Previous.Select 'Выбираем предыдущий лист
+     ActiveCell.Offset(0, 1).Select 'Смещаемся с текущей ячейки на ячейку с ID ниже по строке для проверки на запролненность
+    ElseIf ActiveCell.Value < 2 and val < 2 Then Exit For ' Если ячейка пуста, выходим из цикла
+    Else: ' В противном случае
+		ActiveSheet.Next.Select ' Выбираем следующий лист
+		Application.Run "'PERSONAL.xlsb'!FNForFull" 'Собираем запросы в Fullname
+		ActiveSheet.Previous.Select ' Возвращаемся на первый лист
+		ActiveCell.Offset(-1, 0).Select
+		val = ActiveCell.Value ' Готовимся к началу работы со следующей группой
+    End If ' Закрываем условие
+	
+    Next i ' Начинаем всё заново со след. Группой
+	
+		ActiveSheet.Next.Select 'Когда всё заканчивается, в последний раз выбираем следующий лист для данного скрипта (FN)
+		Application.Run "'PERSONAL.xlsb'!FNForFull" ' В последний раз используем его для захвата крайней группы.
+		Sheets("Output").Select ' Возвращаемся на первый лист
+		Application.Run "'PERSONAL.xlsb'!equality" ' Удаляем строки с повторяющимся ID группы.
+		Rows("1:1").Select ' Выбираем первую стркоу
+		Selection.Delete Shift:=xlUp 'Удаляем заголовки стобцов (первую строку)
+		Columns("E:E").Select ' Выбираем стобец с ID
+		Selection.Copy ' Копируем
+		ActiveSheet.Next.Select' Выбираем следующий лист
+		Columns("G:G").Select' Выбиаем колонки
+		ActiveSheet.Paste'Вставляем ID
+		Columns("G:I").Select' Выделяем ID c фуллнеймами и тайтлами
+		Application.CutCopyMode = False' Очищаем буфер
+		Selection.Copy' Копируем
+		Sheets.Add After:=Sheets(Sheets.Count)' Создаем новый лист
+		ActiveSheet.Paste' Вставляем значения туда
+		Application.Run "'PERSONAL.xlsb'!SFP"' Запускаем скрипт, который превращает все это в форму
+		Columns("A:A").Select' Выбираем колонки А
+    With Selection.Interior'
+        .Pattern = xlNone'
+        .TintAndShade = 0'
+        .PatternTintAndShade = 0' 
+    End With' Всем этим циклом убираем заливку цветом , которая у нас скопировалась с первого листа
+    Range("A1").Select' Выбираем А1
+    ActiveSheet.Previous.Select' Возвращаемся на лист с уже не нужной инфой
+    ActiveWindow.SelectedSheets.Delete' Удаляем к чертовой матери его.
 End Sub
 Sub SFP()
 '

@@ -43,7 +43,7 @@ e = 1
 	'	Next d 'Повторяем цикл
 		
     ' ActiveSheet.Paste 'Вставляем
-	 'ActiveSheet.Previous.Select 'Выбираем предыдущий лист
+	 ActiveSheet.Previous.Select 'Выбираем предыдущий лист
      ActiveCell.Offset(0, 1).Select 'Смещаемся с текущей ячейки на ячейку с ID ниже по строке для проверки на запролненность
     ElseIf ActiveCell.Value < 2 and val < 2 Then Exit For ' Если ячейка пуста, выходим из цикла
     Else: ' В противном случае
@@ -317,7 +317,7 @@ e = 1
 	'	Next d 'Повторяем цикл
 		
     ' ActiveSheet.Paste 'Вставляем
-	 'ActiveSheet.Previous.Select 'Выбираем предыдущий лист
+	 ActiveSheet.Previous.Select 'Выбираем предыдущий лист
      ActiveCell.Offset(0, 1).Select 'Смещаемся с текущей ячейки на ячейку с ID ниже по строке для проверки на запролненность
     ElseIf ActiveCell.Value < 2 and val < 2 Then Exit For ' Если ячейка пуста, выходим из цикла
     Else: ' В противном случае
@@ -397,7 +397,7 @@ Sub SFP()
     Range("F1").Select
     ActiveCell.FormulaR1C1 = "Const"
     Range("G1").Select
-    ActiveCell.FormulaR1C1 = ";;;;;"
+    ActiveCell.FormulaR1C1 = ";;;;;;"
     Range("B1").Select
      Do Until IsEmpty(Cells(i, 1))
      ActiveCell.FormulaR1C1 = ";"
@@ -415,7 +415,7 @@ Sub SFP()
         "— купить оптом и в розницу | Цена от ##minPrice## р в интернет-магазине Сима-ленд"
     Range("G1").Select
      Do Until IsEmpty(Cells(i3, 1))
-     ActiveCell.FormulaR1C1 = ";;;;;"
+     ActiveCell.FormulaR1C1 = ";;;;;;"
      ActiveCell.Offset(1, 0).Select
      i3 = i3 + 1
      Loop

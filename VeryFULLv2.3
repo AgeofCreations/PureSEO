@@ -110,13 +110,8 @@ Sub fnforfull()
     Loop
     RowNumber = ActiveSheet.Range("A65536").End(xlUp).Row
     Range("E4").Select
-    If RowNumber > 2 Then
-    ActiveCell.FormulaR1C1 = _
-        "=CONCATENATE(R[-2]C[-4],R[-2]C[-3],R[-1]C[-4],R[-1]C[-3],RC[-4],RC[-3])"
-        Else
     ActiveCell.FormulaR1C1 = _
         "=CONCATENATE(R[-4]C[-4],R[-4]C[-3],R[-3]C[-4],R[-3]C[-3],R[-2]C[-4],R[-2]C[-3],R[-1]C[-4],R[-1]C[-3],RC[-4])"
-        End If
     Selection.Copy
     Range("H1").Select
     For nofFullNames = 1 To 1000
@@ -233,7 +228,7 @@ Sub catforfull()
      Loop
     Range("C2").Select
      Do Until IsEmpty(Cells(i2, 1))
-        ActiveCell.FormulaR1C1 = "Купить"
+        ActiveCell.FormulaR1C1 = "Êóïèòü"
         ActiveCell.Offset(1, 0).Select
         i2 = i2 + 1
      Loop
@@ -256,7 +251,7 @@ Sub catforfull()
      Loop
      Range("F2").Select
      Do Until IsEmpty(Cells(i6, 1))
-        ActiveCell.FormulaR1C1 = "оптом и в розницу | Цена от ##minPrice## р в интернет-магазине Сима-ленд"
+        ActiveCell.FormulaR1C1 = "îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò-ìàãàçèíå Ñèìà-ëåíä"
         ActiveCell.Offset(1, 0).Select
         i6 = i6 + 1
      Loop
@@ -421,7 +416,7 @@ Sub sfp()
      Loop
     Range("F2").Select
      Do Until IsEmpty(Cells(i4, 1))
-     ActiveCell.FormulaR1C1 = "— оптом и в розницу | Цена от ##minPrice## р в интернет-магазине Сима-ленд"
+     ActiveCell.FormulaR1C1 = "— îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò-ìàãàçèíå Ñèìà-ëåíä"
      ActiveCell.Offset(1, 0).Select
      i4 = i4 + 1
      Loop

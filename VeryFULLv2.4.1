@@ -1,0 +1,40 @@
+Sub A7_UlyaZdarova()
+
+Dim i As Integer
+Dim i1 As Integer
+
+Dim n As Integer
+Dim var1 As Variant
+Dim var2 As Variant
+Dim id1 As Integer
+Dim idi As Integer
+
+Range("C2").Select
+posStr = Cells(1, 1).End(xlDown).Row
+n = 1
+For i = 1 To posStr
+For i1 = 1 To 1488
+    var1 = ActiveCell.Value
+    ActiveCell.Offset(1, 0).Select
+    If var1 > 1 Then
+    Else:
+    ActiveCell.Offset(-i1, -1).Select
+    ActiveCell.Value = n
+    n = n + 1
+    ActiveCell.Offset(i1, 1).Select
+    Exit For
+    End If
+Next i1
+Next i
+Range("B2").Select
+For idi = 1 To 75
+    id1 = ActiveCell.Value
+    ActiveCell.Offset(1, 0).Select
+    If ActiveCell.Value < 1 And ActiveCell.Offset(0, 1).Value > 1 Then
+    ActiveCell.Value = id1
+    ElseIf ActiveCell.Value > 1 Then
+    id1 = ActiveCell.Value
+    Else: ActiveCell.Offset(1, 0).Select
+    End If
+Next idi
+End Sub

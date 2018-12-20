@@ -67,7 +67,7 @@ e = 1
         ActiveSheet.Next.Select ' ???????? ????????? ????
         Columns("G:G").Select ' ??????? ???????
         ActiveSheet.Paste '????????? ID
-        Columns("G:I").Select ' ???????? ID c ??????????? ? ????????
+        Columns("G:J").Select ' ???????? ID c ??????????? ? ????????
         Application.CutCopyMode = False ' ??????? ?????
         Selection.Copy ' ????????
         Sheets.Add After:=Sheets(Sheets.Count) ' ??????? ????? ????
@@ -100,6 +100,7 @@ Sub fnforfull()
     nofFullNames = 1
     d = 1
     noTitles = 1
+    noDescr = 1
     Range("A1").Select
     Application.CutCopyMode = False
     ActiveCell.Offset(0, i).Select
@@ -120,14 +121,22 @@ Sub fnforfull()
     Next nofFullNames
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
         :=False, Transpose:=False
-    Range("E5").Select
-    ActiveCell.FormulaR1C1 = "=CONCATENATE(R[-4]C[-4],R[-4]C[-3])"
+    Range("A1").Select
     Selection.Copy
     Range("I1").Select
     For noTitles = 1 To 1000
         If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For
         noTitles = noTitles + 1
     Next noTitles
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
+    Range("A2").Select
+    Selection.Copy
+    Range("J1").Select
+    For noDescr = 1 To 1000
+        If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For
+        noTitles = noTitles + 1
+    Next noDescr
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
         :=False, Transpose:=False
     ActiveSheet.Range("A1:B100").Select
@@ -186,6 +195,8 @@ Sub catforfull()
     Dim i5 As Integer
     Dim i6 As Integer
     Dim i7 As Integer
+    Dim i8 As Integer
+    Dim i9 As Integer
     Dim r As Range
     i = 1
     i2 = 1
@@ -194,9 +205,15 @@ Sub catforfull()
     i5 = 1
     i6 = 1
     i7 = 1
+    i8 = 1
+    i9 = 1
     Columns("B:B").Select
     Selection.Cut
-    Range("H1").Select
+    Range("G1").Select
+    ActiveSheet.Paste
+    Columns("D:D").Select
+    Selection.Cut
+    Range("I1").Select
     ActiveSheet.Paste
     Columns("C:C").Select
     Selection.Cut
@@ -212,14 +229,20 @@ Sub catforfull()
     ActiveCell.FormulaR1C1 = "Const1"
     Range("D1").Select
     ActiveCell.FormulaR1C1 = "Title"
-    Range("H1").Select
-    ActiveCell.FormulaR1C1 = "FN"
-    Range("F1").Select
-    ActiveCell.FormulaR1C1 = "Const2"
     Range("G1").Select
+    ActiveCell.FormulaR1C1 = "FN"
+    Range("E1").Select
+    ActiveCell.FormulaR1C1 = "Const2"
+    Range("F1").Select
+    ActiveCell.FormulaR1C1 = ";"
+    Range("K1").Select
+    ActiveCell.FormulaR1C1 = ";;;;"
+    Range("H1").Select
     ActiveCell.FormulaR1C1 = ";"
     Range("I1").Select
-    ActiveCell.FormulaR1C1 = ";;;;;"
+    ActiveCell.FormulaR1C1 = "Descr"
+    Range("J1").Select
+    ActiveCell.FormulaR1C1 = "Const3"
     Range("B1").Select
      Do Until IsEmpty(Cells(i, 1))
         ActiveCell.FormulaR1C1 = ";"
@@ -228,42 +251,56 @@ Sub catforfull()
      Loop
     Range("C2").Select
      Do Until IsEmpty(Cells(i2, 1))
-        ActiveCell.FormulaR1C1 = "Êóïèòü"
+        ActiveCell.FormulaR1C1 = "Купить"
         ActiveCell.Offset(1, 0).Select
         i2 = i2 + 1
      Loop
      ActiveCell.Offset(-1, 0).Select
      Selection.ClearContents
-    Range("F2").Select
+    Range("E2").Select
     ActiveCell.FormulaR1C1 = _
         "— ????? ? ? ??????? | ???? ?? ##minPrice## ? ? ????????-???????? ????-????"
-    Range("G1").Select
+    Range("F1").Select
      Do Until IsEmpty(Cells(i3, 1))
         ActiveCell.FormulaR1C1 = ";"
         ActiveCell.Offset(1, 0).Select
         i3 = i3 + 1
      Loop
-    Range("E2").Select
+    Range("J2").Select
      Do Until IsEmpty(Cells(i4, 1)) '— eoieou iioii e a ?icieoo | Oaia io ##minPrice## ? a eioa?iao iaaaceia Neia-eaia
-        ActiveCell.FormulaR1C1 = " "
+        ActiveCell.FormulaR1C1 = "от производителя в наличии ##count## SKU % Заказать онлайн из каталога Сима-ленд и оформить доставку вы можете по * 8 800 1000 281"
         ActiveCell.Offset(1, 0).Select
         i4 = i4 + 1
      Loop
-     Range("F2").Select
+     Range("E2").Select
      Do Until IsEmpty(Cells(i6, 1))
-        ActiveCell.FormulaR1C1 = "îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò-ìàãàçèíå Ñèìà-ëåíä"
+        ActiveCell.FormulaR1C1 = "оптом и в розницу | Цена от ##minPrice## р в интернет-магазине Сима-ленд"
         ActiveCell.Offset(1, 0).Select
         i6 = i6 + 1
+     Loop
+     Range("H2").Select
+     Do Until IsEmpty(Cells(i7, 1))
+        ActiveCell.FormulaR1C1 = ";"
+        ActiveCell.Offset(1, 0).Select
+        i7 = i7 + 1
      Loop
      ActiveCell.Offset(-1, 0).Select
      Selection.ClearContents
      Range("A1").Select
-     Range("I1").Select
-     Do Until IsEmpty(Cells(i7, 1))
-        ActiveCell.FormulaR1C1 = ";;;;;"
+     Range("K1").Select
+     Do Until IsEmpty(Cells(i8, 1))
+        ActiveCell.FormulaR1C1 = ";;;;"
         ActiveCell.Offset(1, 0).Select
-        i7 = i7 + 1
+        i8 = i8 + 1
      Loop
+     Range("I1").Select
+     Set r = ActiveCell
+     For i9 = 1 To 1000
+        If ActiveCell.Value > 2 Then ActiveCell.Value = replace(r, Mid(r, 1, 1), UCase(Mid(r, 1, 1)), 1, 1) Else: Exit For
+        ActiveCell.Offset(1, 0).Select
+     Set r = ActiveCell
+     i9 = i9 + 1
+     Next i9
 End Sub
 
 
@@ -363,12 +400,16 @@ Sub sfp()
     Dim i3 As Integer
     Dim i4 As Integer
     Dim i5 As Integer
+    Dim i6 As Integer
+    Dim i7 As Integer
     Dim r As Range
     i = 1
     i2 = 1
     i3 = 1
     i4 = 1
     i5 = 1
+    i6 = 1
+    i7 = 1
     Columns("C:C").Select
     Selection.Cut
     Range("E1").Select
@@ -376,6 +417,10 @@ Sub sfp()
     Columns("B:B").Select
     Selection.Cut
     Range("C1").Select
+    ActiveSheet.Paste
+    Columns("D:D").Select
+    Selection.Cut
+    Range("H1").Select
     ActiveSheet.Paste
     Rows("1:1").Select
     Selection.Insert Shift:=xlDown
@@ -391,34 +436,35 @@ Sub sfp()
     ActiveCell.FormulaR1C1 = "Title"
     Range("F1").Select
     ActiveCell.FormulaR1C1 = "Const"
-    Range("G1").Select
-    ActiveCell.FormulaR1C1 = ";;;;;"
+    Range("J1").Select
+    ActiveCell.FormulaR1C1 = ";;;;"
+    Range("I1").Select
+    ActiveCell.FormulaR1C1 = "Const2"
+    Range("H1").Select
+    ActiveCell.FormulaR1C1 = "Descr"
     Range("B1").Select
      Do Until IsEmpty(Cells(i, 1))
-     ActiveCell.FormulaR1C1 = ";"
-     ActiveCell.Offset(1, 0).Select
-     i = i + 1
+        ActiveCell.FormulaR1C1 = ";"
+        ActiveCell.Offset(1, 0).Select
+        i = i + 1
      Loop
     Range("D1").Select
      Do Until IsEmpty(Cells(i2, 1))
-     ActiveCell.FormulaR1C1 = ";"
-     ActiveCell.Offset(1, 0).Select
-     i2 = i2 + 1
+        ActiveCell.FormulaR1C1 = ";"
+        ActiveCell.Offset(1, 0).Select
+        i2 = i2 + 1
      Loop
-    Range("F2").Select
-    ActiveCell.FormulaR1C1 = _
-        "— ?????? ????? ? ? ??????? | ???? ?? ##minPrice## ? ? ????????-???????? ????-????"
     Range("G1").Select
      Do Until IsEmpty(Cells(i3, 1))
-     ActiveCell.FormulaR1C1 = ";;;;;;"
-     ActiveCell.Offset(1, 0).Select
-     i3 = i3 + 1
+        ActiveCell.FormulaR1C1 = ";"
+        ActiveCell.Offset(1, 0).Select
+        i3 = i3 + 1
      Loop
     Range("F2").Select
      Do Until IsEmpty(Cells(i4, 1))
-     ActiveCell.FormulaR1C1 = "— îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò-ìàãàçèíå Ñèìà-ëåíä"
-     ActiveCell.Offset(1, 0).Select
-     i4 = i4 + 1
+        ActiveCell.FormulaR1C1 = "— оптом и в розницу | Цена от ##minPrice## р в интернет-магазине Сима-ленд"
+        ActiveCell.Offset(1, 0).Select
+        i4 = i4 + 1
      Loop
      ActiveCell.Offset(-1, 0).Select
      Selection.ClearContents
@@ -479,6 +525,4 @@ Sub A1Sort()
         .Apply
     End With
 End Sub
-
-
 

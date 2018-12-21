@@ -130,15 +130,7 @@ Sub fnforfull()
     Next noTitles
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
         :=False, Transpose:=False
-    Range("A2").Select
-    Selection.Copy
-    Range("J1").Select
-    For noDescr = 1 To 1000
-        If ActiveCell.Value > 2 Then ActiveCell.Offset(1, 0).Select Else: Exit For
-        noTitles = noTitles + 1
-    Next noDescr
-    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
-        :=False, Transpose:=False
+    ActiveCell.Offset(0, 1).Value = Range("A2").Value
     ActiveSheet.Range("A1:B100").Select
     Application.CutCopyMode = False
     Selection.ClearContents
@@ -251,7 +243,7 @@ Sub catforfull()
      Loop
     Range("C2").Select
      Do Until IsEmpty(Cells(i2, 1))
-        ActiveCell.FormulaR1C1 = "Купить"
+        ActiveCell.FormulaR1C1 = "Êóïèòü"
         ActiveCell.Offset(1, 0).Select
         i2 = i2 + 1
      Loop
@@ -268,16 +260,20 @@ Sub catforfull()
      Loop
     Range("J2").Select
      Do Until IsEmpty(Cells(i4, 1)) '— eoieou iioii e a ?icieoo | Oaia io ##minPrice## ? a eioa?iao iaaaceia Neia-eaia
-        ActiveCell.FormulaR1C1 = "от производителя в наличии ##count## SKU % Заказать онлайн из каталога Сима-ленд и оформить доставку вы можете по * 8 800 1000 281"
+        ActiveCell.FormulaR1C1 = "îò ïðîèçâîäèòåëÿ â íàëè÷èè ##count## SKU % Çàêàçàòü îíëàéí èç êàòàëîãà Ñèìà-ëåíä è îôîðìèòü äîñòàâêó âû ìîæåòå ïî * 8 800 1000 281"
         ActiveCell.Offset(1, 0).Select
         i4 = i4 + 1
      Loop
+     ActiveCell.Offset(-1, 0).Select
+     Selection.ClearContents
      Range("E2").Select
      Do Until IsEmpty(Cells(i6, 1))
-        ActiveCell.FormulaR1C1 = "оптом и в розницу | Цена от ##minPrice## р в интернет-магазине Сима-ленд"
+        ActiveCell.FormulaR1C1 = "îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò-ìàãàçèíå Ñèìà-ëåíä"
         ActiveCell.Offset(1, 0).Select
         i6 = i6 + 1
      Loop
+     ActiveCell.Offset(-1, 0).Select
+     Selection.ClearContents
      Range("H2").Select
      Do Until IsEmpty(Cells(i7, 1))
         ActiveCell.FormulaR1C1 = ";"
@@ -373,7 +369,7 @@ e = 1
         ActiveSheet.Next.Select ' ???????? ????????? ????
         Columns("G:G").Select ' ??????? ???????
         ActiveSheet.Paste '????????? ID
-        Columns("G:I").Select ' ???????? ID c ??????????? ? ????????
+        Columns("G:J").Select ' ???????? ID c ??????????? ? ????????
         Application.CutCopyMode = False ' ??????? ?????
         Selection.Copy ' ????????
         Sheets.Add After:=Sheets(Sheets.Count) ' ??????? ????? ????
@@ -466,7 +462,7 @@ Sub sfp()
      Loop
     Range("F2").Select
      Do Until IsEmpty(Cells(i4, 1))
-        ActiveCell.FormulaR1C1 = "— оптом и в розницу | Цена от ##minPrice## р в интернет-магазине Сима-ленд"
+        ActiveCell.FormulaR1C1 = "— îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò-ìàãàçèíå Ñèìà-ëåíä"
         ActiveCell.Offset(1, 0).Select
         i4 = i4 + 1
      Loop
@@ -474,7 +470,7 @@ Sub sfp()
      Selection.ClearContents
      Range("H2").Select
      Do Until IsEmpty(Cells(i6, 1))
-        ActiveCell.FormulaR1C1 = "Интернет-магазин SIMA-LAND.RU –"
+        ActiveCell.FormulaR1C1 = "Èíòåðíåò-ìàãàçèí SIMA-LAND.RU –"
         ActiveCell.Offset(1, 0).Select
         i6 = i6 + 1
      Loop
@@ -482,7 +478,7 @@ Sub sfp()
      Selection.ClearContents
      Range("J2").Select
      Do Until IsEmpty(Cells(i7, 1))
-        ActiveCell.FormulaR1C1 = "купить по цене опта от ##minPrice## р. Заказать шкафы с зеркалом в комнату – ##count## SKU в наличии от производителя с доставкой. Москва, Санкт-Петербург, Екатеринбург"
+        ActiveCell.FormulaR1C1 = "êóïèòü ïî öåíå îïòà îò ##minPrice## ð. Çàêàçàòü øêàôû ñ çåðêàëîì â êîìíàòó – ##count## SKU â íàëè÷èè îò ïðîèçâîäèòåëÿ ñ äîñòàâêîé. Ìîñêâà, Ñàíêò-Ïåòåðáóðã, Åêàòåðèíáóðã"
         ActiveCell.Offset(1, 0).Select
         i7 = i7 + 1
      Loop

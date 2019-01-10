@@ -130,7 +130,11 @@ Sub fnforfull()
     Next noTitles
     Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
         :=False, Transpose:=False
+    noDescr = Range("A2").Value
+    If noDescr > 0 Then
     ActiveCell.Offset(0, 1).Value = Range("A2").Value
+    Else: ActiveCell.Offset(0, 1).Value = Range("A1").Value
+    End If
     ActiveSheet.Range("A1:B100").Select
     Application.CutCopyMode = False
     Selection.ClearContents
@@ -549,6 +553,3 @@ Sub A1Sort()
         .Apply
     End With
 End Sub
-
-
-

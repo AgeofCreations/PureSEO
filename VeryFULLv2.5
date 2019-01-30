@@ -464,7 +464,7 @@ Sub sfp()
      Loop
     Range("F2").Select
      Do Until IsEmpty(Cells(i4, 1))
-        ActiveCell.FormulaR1C1 = "— оптом и в розницу | Цена от ##minPrice## р в интернет-магазине Сима-ленд"
+        ActiveCell.FormulaR1C1 = "— купить оптом и в розницу | Цена от ##minPrice## р в интернет-магазине Сима-ленд"
         ActiveCell.Offset(1, 0).Select
         i4 = i4 + 1
      Loop

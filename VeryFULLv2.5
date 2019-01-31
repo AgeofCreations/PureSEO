@@ -247,7 +247,7 @@ Sub catforfull()
      Loop
     Range("C2").Select
      Do Until IsEmpty(Cells(i2, 1))
-        ActiveCell.FormulaR1C1 = "Купить"
+        ActiveCell.FormulaR1C1 = "Êóïèòü"
         ActiveCell.Offset(1, 0).Select
         i2 = i2 + 1
      Loop
@@ -264,7 +264,7 @@ Sub catforfull()
      Loop
     Range("J2").Select
      Do Until IsEmpty(Cells(i4, 1)) '— eoieou iioii e a ?icieoo | Oaia io ##minPrice## ? a eioa?iao iaaaceia Neia-eaia
-        ActiveCell.FormulaR1C1 = "от производителя в наличии ##count## SKU % Заказать онлайн из каталога Сима-ленд и оформить доставку вы можете по @ 8 800 234 1000"
+        ActiveCell.FormulaR1C1 = "îò ïðîèçâîäèòåëÿ â íàëè÷èè ##count## SKU % Çàêàçàòü îíëàéí èç êàòàëîãà Ñèìà-ëåíä è îôîðìèòü äîñòàâêó âû ìîæåòå ïî * 8 800 234 1000"
         ActiveCell.Offset(1, 0).Select
         i4 = i4 + 1
      Loop
@@ -272,7 +272,7 @@ Sub catforfull()
      Selection.ClearContents
      Range("E2").Select
      Do Until IsEmpty(Cells(i6, 1))
-        ActiveCell.FormulaR1C1 = "оптом и в розницу | Цена от ##minPrice## р в интернет-магазине Сима-ленд"
+        ActiveCell.FormulaR1C1 = "îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò-ìàãàçèíå Ñèìà-ëåíä"
         ActiveCell.Offset(1, 0).Select
         i6 = i6 + 1
      Loop
@@ -440,6 +440,8 @@ Sub sfp()
     ActiveCell.FormulaR1C1 = "Const"
     Range("K1").Select
     ActiveCell.FormulaR1C1 = ";;;;"
+    Range("H1").Select
+    ActiveCell.FormulaR1C1 = "Const2"
     Range("I1").Select
     ActiveCell.FormulaR1C1 = "Descr"
     Range("J1").Select
@@ -464,16 +466,25 @@ Sub sfp()
      Loop
     Range("F2").Select
      Do Until IsEmpty(Cells(i4, 1))
-        ActiveCell.FormulaR1C1 = "— купить оптом и в розницу | Цена от ##minPrice## р в интернет-магазине Сима-ленд"
+        ActiveCell.FormulaR1C1 = "— êóèòü îïòîì è â ðîçíèöó | Öåíà îò ##minPrice## ð â èíòåðíåò-ìàãàçèíå Ñèìà-ëåíä"
         ActiveCell.Offset(1, 0).Select
         i4 = i4 + 1
      Loop
      ActiveCell.Offset(-1, 0).Select
      Selection.ClearContents
-     
+     Range("I1").Select
+     Set r = ActiveCell
+     For i5 = 1 To 1000
+     If ActiveCell.Value > 2 Then ActiveCell.Value = replace(r, Mid(r, 1, 1), UCase(Mid(r, 1, 1)), 1, 1) Else: Exit For
+     ActiveCell.Offset(1, 0).Select
+     Set r = ActiveCell
+     i5 = i5 + 1
+     Next i5
+     ActiveCell.Offset(-1, 0).Select
+     Selection.ClearContents
      Range("J2").Select
      Do Until IsEmpty(Cells(i7, 1))
-        ActiveCell.FormulaR1C1 = "от производителя в наличии ##count## SKU % Заказать онлайн из каталога Сима-ленд и оформить доставку вы можете по @ 8 800 234 1000"
+        ActiveCell.FormulaR1C1 = "îò ïðîèçâîäèòåëÿ â íàëè÷èè ##count## SKU % Çàêàçàòü îíëàéí èç êàòàëîãà Ñèìà-ëåíä è îôîðìèòü äîñòàâêó âû ìîæåòå ïî @ 8 800 234 1000"
         ActiveCell.Offset(1, 0).Select
         i7 = i7 + 1
      Loop
@@ -495,13 +506,6 @@ Sub sfp()
      Set r = ActiveCell
      i5 = i5 + 1
      Next i5
-     Range("I1").Select
-     For i6 = 1 To 1000
-     If ActiveCell.Value > 2 Then ActiveCell.Value = replace(r, Mid(r, 1, 1), UCase(Mid(r, 1, 1)), 1, 1) Else: Exit For
-     ActiveCell.Offset(1, 0).Select
-     Set r = ActiveCell
-     i6 = i6 + 1
-     Next i6
      Range("A1").Select
     'ActiveSheet.Previous.Select
     'ActiveWindow.SelectedSheets.Delete
@@ -551,3 +555,7 @@ Sub A1Sort()
         .Apply
     End With
 End Sub
+
+
+
+
